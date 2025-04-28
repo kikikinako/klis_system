@@ -1,0 +1,1 @@
+print("Hello to kinakoi's test.py")
