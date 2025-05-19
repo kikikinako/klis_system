@@ -7,10 +7,10 @@ index = {}
 t = Tokenizer()
 
 pattern = re.compile(r"[　-ー]$")
-num_pattern = re.compile(r"[^\u3040-\u30FF\u4E00-\u9FFFa-zA-Z]")
+num_pattern = re.compile(r"[^\u3040-\u30FF\u4E00-\u9FFFa-zA-Z\s]")
 
 
-for number in range(300,388):
+for number in range(247,388):
     # PDFファイルを開く
     doc = fitz.open(f"pdfs/{number}.pdf")
     # 全ページのテキストを結合
@@ -24,17 +24,22 @@ for number in range(300,388):
     tokens = t.tokenize(clean_text)
     
     for token in tokens:
-        if pattern.match(token.surface):
+        word = token.surface.lower()
+        if pattern.match(word):
             continue
-        if num_pattern.match(token.surface):
+        if num_pattern.match(word):
             continue
-        if token.surface in index:
-            if number not in index[token.surface]:
-                index[token.surface].append(number)
+        if len(word) <= 1:  # 1文字以下を除外
+            continue
+        if word in index:
+            if number not in index[word]:
+                index[word].append(number)
         else:
-            index[token.surface] = [number]
+            index[word] = [number]
         
-print(index)
+with open('index.txt', 'w', encoding='utf-8') as f:
+    for words in sorted(index):
+        f.write(f"{words}: {index[words]}\n")
     
     
     
