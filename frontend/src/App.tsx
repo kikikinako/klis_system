@@ -1,6 +1,6 @@
 
 
-const URL: string = "http://localhost:8000/";
+const URL: string = "http://localhost:8000/search";
 
 export default function Main() {
 
