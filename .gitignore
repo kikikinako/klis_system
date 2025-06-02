@@ -1,0 +1,47 @@
+# Pythonバイトコード
+__pycache__/
+*.py[cod]
+*$py.class
+
+# 仮想環境（フォルダ名がvenvの場合）
+venv/
+ENV/
+env/
+.venv/
+
+# VSCodeなどのIDE関連
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Jupyter Notebookのチェックポイント
+.ipynb_checkpoints
+
+# パッケージビルド
+build/
+dist/
+*.egg-info/
+
+# ログ・テスト・一時ファイル
+*.log
+*.tmp
+*.bak
+*.swp
+.DS_Store
+
+# pipenv/poetry関連
+Pipfile.lock
+poetry.lock
+
+# mypy, pytestなどのキャッシュ
+.mypy_cache/
+.pytest_cache/
+.cache/
+
+# OSによる隠しファイル
+Thumbs.db
+ehthumbs.db
+
+#pdf
+*.pdf
