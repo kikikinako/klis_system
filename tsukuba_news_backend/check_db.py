@@ -4,7 +4,7 @@ conn = sqlite3.connect("tsukuba_news.db")
 c = conn.cursor()
 
 # テーブル作成
-c.execute("SELECT * FROM index_table LIMIT 40")
+c.execute('SELECT word, page FROM index_table WHERE word LIKE ?', ('%' + "筑波" + '%',))
 rows = c.fetchall()
 
 # データの表示
