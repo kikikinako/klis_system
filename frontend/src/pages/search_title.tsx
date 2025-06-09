@@ -3,6 +3,7 @@ import { useState } from "react";
 
 const URL: string = "http://localhost:8000/";
 
+// 検索キーワードの送信とデータの取得
 async function fetchData (data: { keywords: string, sort: string }) {
   const res = await fetch(`${URL}/search`, {
     mode: "cors",
@@ -18,10 +19,49 @@ async function fetchData (data: { keywords: string, sort: string }) {
   const json = await res.json();
   console.log(json["result"]);
   return json.result
-}
+};
 
+// 検索結果のデータの型
+type ResultItem = {
+  title: string;
+  issue: string;
+  date: string;
+  page: string;
+  size: string;
+  author: string;
+};
+
+// 検索結果を表示するための関数
+function showResult(data: ResultItem[]) {
+  const showRow = data.map((item, index) => {
+    return (
+      <tr key={index}>
+        <td>{item.title}</td>
+        <td>{item.issue}</td>
+        <td>{item.date}</td>
+        <td>{item.page}</td>
+        <td>{item.size}</td>
+        <td>{item.author}</td>
+      </tr>
+    )
+  })
+  return (
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {showRow}
+      </tbody>
+    </table>
+  )
+};
+
+// 検索ページ全体
 export default function Search_title() {
-  const [data, setData] = useState<{ "result" : string }[] | null>(null)
+  const [data, setData] = useState<ResultItem[] | null>(null);
   const [error, setError] = useState< string | null >(null)
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -48,7 +88,6 @@ export default function Search_title() {
     };
   };
 
-  const Listitems = data && data.map(item => <li>{item}</li>)
   
   return (
     <>
@@ -73,8 +112,8 @@ export default function Search_title() {
 
       {error && <p style={{ color: "red" }}>{error}</p>}
 
-      <ul>{Listitems}</ul>
+      {data && showResult(data)}
 
     </>
   );
-}
+};
