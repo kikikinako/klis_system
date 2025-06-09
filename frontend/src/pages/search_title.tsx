@@ -49,7 +49,12 @@ function showResult(data: ResultItem[]) {
     <table>
       <thead>
         <tr>
-          <th></th>
+          <th>title</th>
+          <th>issue</th>
+          <th>date</th>
+          <th>page</th>
+          <th>size</th>
+          <th>author</th>
         </tr>
       </thead>
       <tbody>
