@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 import sqlite3
+import json
 from flask_cors import CORS
 
 app = Flask(__name__)
@@ -17,11 +18,16 @@ def search_post():
     # SQLiteデータベースに接続
     conn = sqlite3.connect("tsukuba_news.db")
     c = conn.cursor()
-    c.execute('SELECT DISTINCT filename FROM index_table WHERE word LIKE ?', ('%' + keyword + '%',))
-    results = c.fetchall()
+    c.execute('SELECT filename, page FROM index_table WHERE word LIKE ?', ('%' + keyword + '%',))
+    row = c.fetchone()
     conn.close()
 
-    return jsonify({"result": [r[0] for r in results]})
+    if row:
+        filenames = json.loads(row[0])
+        pages = json.loads(row[1])
+        return jsonify({"filename": filenames, "page": pages})
+    else:
+        return jsonify({"filename": [], "page": []})
 
 if __name__ == "__main__":
     app.run(debug=True, port=8000)
