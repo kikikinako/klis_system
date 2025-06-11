@@ -23,12 +23,8 @@ async function fetchData (data: { keywords: string, sort: string }) {
 
 // 検索結果のデータの型
 type ResultItem = {
-  title: string;
-  issue: string;
-  date: string;
+  filename: string;
   page: string;
-  size: string;
-  author: string;
 };
 
 // 検索結果を表示するための関数
@@ -36,11 +32,8 @@ function showResult(data: ResultItem[]) {
   const showRow = data.map((item, index) => {
     return (
       <tr key={index}>
-        <td>{item.title}</td>
-        <td>{item.issue}</td>
-        <td>{item.date}</td>
+        <td>{item.filename}</td>
         <td>{item.page}</td>
-        <td>{item.author}</td>
       </tr>
     )
   })
@@ -49,11 +42,8 @@ function showResult(data: ResultItem[]) {
       <caption>検索結果</caption>
       <thead>
         <tr>
-          <th>記事名</th>
           <th>号数</th>
-          <th>日付</th>
           <th>該当ページ</th>
-          <th>執筆者</th>
         </tr>
       </thead>
       <tbody>

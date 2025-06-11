@@ -98,7 +98,6 @@ export default function Search_fulltext() {
       <div className="page_title">
         <h1 className="title">記事名検索</h1>
         <p className="sub_title">新聞ごとの記事名に対する検索を行います</p>
-        <p className="sub_title">新聞ごとの記事名に対する検索を行います</p>
       </div>
       <form method="post" onSubmit={handleSubmit}>
         <label>

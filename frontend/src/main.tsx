@@ -11,7 +11,7 @@ import Root from "./pages/root";
 import ErrorPage from "./pages/error_page"
 import Home from "./pages/home";
 import Search_title from "./pages/search_title";
-import Search_fulltext from "./pages/search_title";
+import Search_fulltext from "./pages/search_fulltext";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
