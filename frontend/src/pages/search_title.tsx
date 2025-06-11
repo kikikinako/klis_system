@@ -11,7 +11,7 @@ async function fetchData (data: { keywords: string, sort: string }) {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({"keywords": data.keywords, "sort": data.sort})
+    body: JSON.stringify({"keywords": data.keywords, "sort": data.sort, "mode": "title"})
   });
   if (!res.ok) {
     throw new Error(`HTTP error! status: ${res.status}`);
@@ -40,21 +40,20 @@ function showResult(data: ResultItem[]) {
         <td>{item.issue}</td>
         <td>{item.date}</td>
         <td>{item.page}</td>
-        <td>{item.size}</td>
         <td>{item.author}</td>
       </tr>
     )
   })
   return (
     <table>
+      <caption>検索結果</caption>
       <thead>
         <tr>
-          <th>title</th>
-          <th>issue</th>
-          <th>date</th>
-          <th>page</th>
-          <th>size</th>
-          <th>author</th>
+          <th>記事名</th>
+          <th>号数</th>
+          <th>日付</th>
+          <th>該当ページ</th>
+          <th>執筆者</th>
         </tr>
       </thead>
       <tbody>
@@ -65,11 +64,12 @@ function showResult(data: ResultItem[]) {
 };
 
 // 検索ページ全体
-export default function Search_title() {
+export default function Search_fulltext() {
   const [data, setData] = useState<ResultItem[] | null>(null);
   const [error, setError] = useState< string | null >(null)
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setError(null);
     // 
     const form = e.currentTarget;
     const formData = new FormData(form);
@@ -93,26 +93,31 @@ export default function Search_title() {
     };
   };
 
-  
   return (
     <>
-      <h1>全文検索</h1>
+      <div className="page_title">
+        <h1 className="title">記事名検索</h1>
+        <p className="sub_title">新聞ごとの記事名に対する検索を行います</p>
+        <p className="sub_title">新聞ごとの記事名に対する検索を行います</p>
+      </div>
       <form method="post" onSubmit={handleSubmit}>
         <label>
-          Input keywords: <input name="keywords" />
+          <p>検索キーワード</p>
+          <input name="keywords" className="text-input"/>
         </label>
         <hr />
-        Sort result
-        <br />
-        <label>
-          ascending: <input type="radio" name="sort" value="asc" defaultChecked={true}/>
-        </label>
-        <label>
-          descending: <input type="radio" name="sort" value="des" />
-        </label>
+        <p>並び替え</p>
+        <div className="radio-group" >
+          <label>
+            昇順（古い順）：<input type="radio" name="sort" value="asc" />
+          </label>
+          <label>
+            降順（新しい順）：<input type="radio" name="sort" value="des" defaultChecked />
+          </label>
+        </div>
         <hr />
-        <button type="reset">Reset form</button>
-        <button type="submit">Submit form</button>
+        <button type="reset">空にする</button>
+        <button type="submit">検索する</button>
       </form>
 
       {error && <p style={{ color: "red" }}>{error}</p>}

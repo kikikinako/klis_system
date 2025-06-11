@@ -5,25 +5,38 @@ export default function Root () {
   return (
     <>
       <div className="container">
-        <div className="sidebar">
-          <ul className="linklist">
-            <li className="link">
-              <NavLink to={"home"}>
-                Home
-              </NavLink>
-            </li>
-            <li className="link">
-              <NavLink to={"search_title"}>
-                Search
-              </NavLink>
-            </li>
-            <li className="link">
-              <NavLink to={"about"}>
-                About
-              </NavLink>  
-            </li>  
-          </ul>  
-        </div>
+        <header className="header">
+          <div className="header-bg" />
+          <div className="header-inner">
+            <NavLink to={"home"}>
+              <img src="/logo.png" alt="logo" className="logo" />
+            </NavLink>
+            <div className="header-site-menu">
+              <ul className="site-menu">
+                <li>
+                  <NavLink to={"home"} className={"link"}>
+                    トップ
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to={"search_fulltext"} className={"link"}>
+                    全文検索
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to={"search_title"} className={"link"}>
+                    記事名検索
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to={"about"} className={"link"}>
+                    About
+                  </NavLink>  
+                </li>  
+              </ul>  
+            </div>
+          </div>
+        </header>
         <div className="content">
           <Outlet />
         </div>

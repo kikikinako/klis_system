@@ -9,20 +9,26 @@ import {
 import "./index.css";
 import Root from "./pages/root";
 import ErrorPage from "./pages/error_page"
-import Index from "./pages/index";
+import Home from "./pages/home";
 import Search_title from "./pages/search_title";
+import Search_fulltext from "./pages/search_title";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route
-    path="/"
-    element={<Root />}
-    errorElement={<ErrorPage />}>
-      <Route index element={<Index />} />
+    <>
       <Route
-      path="search_title"
-      element={<Search_title />}/>
-    </Route>
+      path="/"
+      element={<Root />}
+      errorElement={<ErrorPage />}>
+        <Route index element={<Home />} />
+        <Route
+        path="search_fulltext"
+        element={<Search_fulltext />}/>
+        <Route
+        path="search_title"
+        element={<Search_title />}/>
+      </Route>
+    </>
   )
 );
 
