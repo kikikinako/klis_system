@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { href } from "react-router-dom";
 
 
 const URL: string = "http://localhost:8000/";
@@ -30,9 +31,15 @@ type ResultItem = {
 // 検索結果を表示するための関数
 function showResult(data: ResultItem[]) {
   const showRow = data.map((item, index) => {
+    let href_text: string
+    if (item.filename >= "360") {
+      href_text = `https://www.tsukuba.ac.jp/about/public-newspaper/pdf/${item.filename}.pdf`
+    } else {
+      href_text = `https://www.tsukuba.ac.jp/about/public-newspaper/${item.filename}.pdf`
+    }
     return (
       <tr key={index}>
-        <td>{item.filename}</td>
+        <td><a href={href_text}>{item.filename}</a></td>
         <td>{item.page}</td>
       </tr>
     )

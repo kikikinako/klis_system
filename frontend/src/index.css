@@ -163,6 +163,7 @@ table {
   font-family: sans-serif;
   font-size: 1rem;
   background-color: #fff;
+  overflow: scroll;
 }
 
 caption {

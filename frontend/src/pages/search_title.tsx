@@ -34,9 +34,16 @@ type ResultItem = {
 // 検索結果を表示するための関数
 function showResult(data: ResultItem[]) {
   const showRow = data.map((item, index) => {
+    let href_text: string
+    if (item.title >= "360") {
+      href_text = `https://www.tsukuba.ac.jp/about/public-newspaper/pdf/${item.title}.pdf`
+    } else {
+      href_text = `https://www.tsukuba.ac.jp/about/public-newspaper/${item.title}.pdf`
+    }
     return (
       <tr key={index}>
-        <td>{item.title}</td>
+        <td><a href={href_text}>{item.title}</a></td>
+        <td>{item.page}</td>
         <td>{item.issue}</td>
         <td>{item.date}</td>
         <td>{item.page}</td>
