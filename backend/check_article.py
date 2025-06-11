@@ -2,7 +2,7 @@ import sqlite3
 import pandas as pd
 
 # --- 設定 ---
-DB_FILE_PATH = 'article_normalized.db' # 新しいDBファイル名
+DB_FILE_PATH = 'tsukuba_news.db'
 
 # pandasの表示設定
 pd.set_option('display.max_rows', 100)
