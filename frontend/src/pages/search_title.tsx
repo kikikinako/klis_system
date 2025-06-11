@@ -46,7 +46,6 @@ function showResult(data: ResultItem[]) {
         <td>{item.page}</td>
         <td>{item.issue}</td>
         <td>{item.date}</td>
-        <td>{item.page}</td>
         <td>{item.author}</td>
       </tr>
     )
@@ -57,9 +56,9 @@ function showResult(data: ResultItem[]) {
       <thead>
         <tr>
           <th>記事名</th>
+          <th>該当ページ</th>
           <th>号数</th>
           <th>日付</th>
-          <th>該当ページ</th>
           <th>執筆者</th>
         </tr>
       </thead>
