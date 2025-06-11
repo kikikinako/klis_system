@@ -23,18 +23,18 @@ CREATE TABLE IF NOT EXISTS index_table (
 # まずfilenameごとの登場回数をカウント
 with open("index.csv", newline='', encoding='utf-8') as f:
     reader = csv.DictReader(f)
-    filename_list = [row['filename'] for row in reader]
+    title_list = [row['title'] for row in reader]
 
-filename_counter = Counter(filename_list)
+title_counter = Counter(title_list)
 
 # 20回を超えるfilenameはDBに入れない
 with open("index.csv", newline='', encoding='utf-8') as f:
     reader = csv.DictReader(f)
     for row in reader:
-        if filename_counter[row['filename']] <= 20:
+        if title_counter[row['title']] <= 20:
             c.execute(
-                'INSERT INTO index_table (word, filename, page) VALUES (?, ?, ?)',
-                (row['word'], row['filename'], row['page'])
+                'INSERT INTO index_table (keyword, title, url, issue, date, page, size, author) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+                (row['keyword'], row['title'], row['url'], row['issue'], row['date'], row['page'], row['size'], row['author'])
             )
 
 conn.commit()
