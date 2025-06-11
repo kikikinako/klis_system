@@ -14,7 +14,7 @@ export default function Root () {
             <div className="header-site-menu">
               <ul className="site-menu">
                 <li>
-                  <NavLink to={"home"} className={"link"}>
+                  <NavLink to={""} className={"link"}>
                     トップ
                   </NavLink>
                 </li>

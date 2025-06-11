@@ -4,14 +4,14 @@ import { useState } from "react";
 const URL: string = "http://localhost:8000/";
 
 // 検索キーワードの送信とデータの取得
-async function fetchData (data: { keywords: string, sort: string }) {
+async function fetchData (data: { keywords: string, sort: string, mode: string}) {
   const res = await fetch(`${URL}/search`, {
     mode: "cors",
     method: "post",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({"keywords": data.keywords, "sort": data.sort, "mode": "title"})
+    body: JSON.stringify({"keywords": data.keywords, "sort": data.sort, "mode": data.mode})
   });
   if (!res.ok) {
     throw new Error(`HTTP error! status: ${res.status}`);
@@ -83,7 +83,8 @@ export default function Search_fulltext() {
 
     const formJson = {
       keywords: formData.get("keywords") as string,
-      sort: formData.get("sort") as string
+      sort: formData.get("sort") as string,
+      mode: formData.get("mode") as string
     };
     console.log(formJson);
 
@@ -107,6 +108,7 @@ export default function Search_fulltext() {
         <p className="sub_title">新聞ごとの記事名に対する検索を行います</p>
       </div>
       <form method="post" onSubmit={handleSubmit}>
+        <input type="hidden" name="mode" value="title" />
         <label>
           <p>検索キーワード</p>
           <input name="keywords" className="text-input"/>
