@@ -16,8 +16,7 @@ async function fetchData (data: { keywords: string, sort: string, mode: string})
     throw new Error(`HTTP error! status: ${res.status}`);
   };
   const json = await res.json();
-  console.log(json["result"]);
-  return json.result
+  return json
 };
 
 // 検索結果のデータの型
