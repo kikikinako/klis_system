@@ -5,13 +5,18 @@ from collections import Counter
 conn = sqlite3.connect("tsukuba_news.db")
 c = conn.cursor()
 
-# テーブル作成（pageカラムを追加）
+# テーブル作成(featureを追加)
 c.execute('''
 CREATE TABLE IF NOT EXISTS index_table (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    word TEXT,
-    filename TEXT,
-    page TEXT
+    keyword TEXT,
+    title TEXT,
+    url TEXT,
+    issue TEXT,
+    date TEXT,
+    page TEXT,
+    size TEXT,
+    author TEXT
 )
 ''')
 
