@@ -8,7 +8,7 @@ export default function Root () {
         <header className="header">
           <div className="header-bg" />
           <div className="header-inner">
-            <NavLink to={"home"}>
+            <NavLink to={""}>
               <img src="/logo.png" alt="logo" className="logo" />
             </NavLink>
             <div className="header-site-menu">

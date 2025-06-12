@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const URL: string = "http://localhost:8000/";
+const URL: string = import.meta.env.VITE_API_BASE_URL;
 
 // 検索キーワードの送信とデータの取得
 async function fetchData (data: { keywords: string, sort: string, mode: string}) {
