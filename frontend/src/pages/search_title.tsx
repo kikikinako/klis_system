@@ -32,6 +32,13 @@ type ResultItem = {
 
 // 検索結果を表示するための関数
 function showResult(data: ResultItem[]) {
+  if (data.length == 0) {
+    return (
+      <table>
+        <caption>当てはまるものがありませんでした。</caption>
+      </table>
+    )
+  }
   const showRow = data.map((item, index) => {
     let href_text: string
     if (item.title >= "360") {
