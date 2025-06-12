@@ -98,7 +98,7 @@ export default function Search_fulltext() {
         <input type="hidden" name="mode" value="fulltext" />
         <label>
           <p>検索キーワード</p>
-          <input name="keywords" className="text-input"/>
+          <input name="keywords" className="text-input" required/>
         </label>
         <hr />
         <p>並び替え</p>

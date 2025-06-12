@@ -10,6 +10,7 @@ import "./index.css";
 import Root from "./pages/root";
 import ErrorPage from "./pages/error_page"
 import Home from "./pages/home";
+import About from "./pages/about";
 import Search_title from "./pages/search_title";
 import Search_fulltext from "./pages/search_fulltext";
 
@@ -21,6 +22,9 @@ const router = createBrowserRouter(
       element={<Root />}
       errorElement={<ErrorPage />}>
         <Route index element={<Home />} />
+        <Route
+        path="about"
+        element={<About />}/>
         <Route
         path="search_fulltext"
         element={<Search_fulltext />}/>

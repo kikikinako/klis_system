@@ -1,6 +1,5 @@
 import { useState } from "react";
 
-
 const URL: string = "http://localhost:8000/";
 
 // 検索キーワードの送信とデータの取得
@@ -110,7 +109,7 @@ export default function Search_fulltext() {
         <input type="hidden" name="mode" value="title" />
         <label>
           <p>検索キーワード</p>
-          <input name="keywords" className="text-input"/>
+          <input name="keywords" className="text-input" required/>
         </label>
         <hr />
         <p>並び替え</p>
