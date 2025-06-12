@@ -70,9 +70,9 @@ def search_post():
         tmp_result = {} #{"filename": "[page,page...],..."}と格納するための一時的なファイル
 
         for row in rows:
-            filenames = ast.literal_eval(row[0])
+            filenames = ast.literal_eval(row[0]) #文字列をリストに変換
             page_lists = ast.literal_eval(row[1])
-            for n in range(len(filenames)):
+            for n in range(len(filenames)): #号数と該当ページのインデックスは対応しているはずなので
                 filename = filenames[n]
                 page_list = page_lists[n]
                 if filename in tmp_result:
@@ -80,7 +80,7 @@ def search_post():
                 else:
                     tmp_result[filename] = page_list
         for key in tmp_result:
-            tmp_result[key] = list(dict.fromkeys(tmp_result[key]))
+            tmp_result[key] = sorted(set(tmp_result[key])) #重複の除去とソート
             result.append({
                 "filename": key,
                 "page": tmp_result[key]
