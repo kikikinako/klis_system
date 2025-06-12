@@ -22,7 +22,7 @@ async function fetchData (data: { keywords: string, sort: string, mode: string})
 // 検索結果のデータの型
 type ResultItem = {
   filename: string;
-  page: string;
+  page: number[];
 };
 
 // 検索結果を表示するための関数
@@ -43,8 +43,8 @@ function showResult(data: ResultItem[]) {
     }
     return (
       <tr key={index}>
-        <td><a href={href_text}>{item.filename}</a></td>
-        <td>{item.page}</td>
+        <td><a href={href_text} target="blank">{item.filename}</a></td>
+        <td>{item.page.join(", ")}</td>
       </tr>
     )
   })

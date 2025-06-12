@@ -48,7 +48,7 @@ def search_post():
                     "title": row[0],
                     "issue": row[1],
                     "date": row[2],
-                    "page": row[3],
+                    "page": row[3], 
                     "size": row[4],
                     "author": row[5]
                 })
