@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 import sqlite3
 from flask_cors import CORS
+import ast
 
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}}, supports_credentials=True)
@@ -66,10 +67,23 @@ def search_post():
         ''', ('%' + keyword + '%',))
         rows = c.fetchall()
 
+        tmp_result = {} #{"filename": "[page,page...],..."}と格納するための一時的なファイル
+
         for row in rows:
+            filenames = ast.literal_eval(row[0])
+            page_lists = ast.literal_eval(row[1])
+            for n in range(len(filenames)):
+                filename = filenames[n]
+                page_list = page_lists[n]
+                if filename in tmp_result:
+                    tmp_result[filename] += page_list
+                else:
+                    tmp_result[filename] = page_list
+        for key in tmp_result:
+            tmp_result[key] = list(dict.fromkeys(tmp_result[key]))
             result.append({
-                "filename": row[0],
-                "page": row[1]
+                "filename": key,
+                "page": tmp_result[key]
             })
 
         conn.close()
