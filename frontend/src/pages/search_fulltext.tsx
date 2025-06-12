@@ -80,7 +80,7 @@ export default function Search_fulltext() {
       sort: formData.get("sort") as string,
       mode: formData.get("mode") as string
     };
-    console.log(formJson);
+    // console.log(formJson);
 
     try {
       const res = await fetchData(formJson);

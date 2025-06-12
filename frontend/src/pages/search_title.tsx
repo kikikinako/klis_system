@@ -16,7 +16,7 @@ async function fetchData (data: { keywords: string, sort: string, mode: string})
     throw new Error(`HTTP error! status: ${res.status}`);
   };
   const json = await res.json();
-  console.log(json)
+  // console.log(json)
   return json
 };
 
@@ -41,17 +41,17 @@ function showResult(data: ResultItem[]) {
   }
   const showRow = data.map((item, index) => {
     let href_text: string
-    if (item.title >= "360") {
-      href_text = `https://www.tsukuba.ac.jp/about/public-newspaper/pdf/${item.title}.pdf`
+    if (item.issue >= "360") {
+      href_text = `https://www.tsukuba.ac.jp/about/public-newspaper/pdf/${item.issue}.pdf`
     } else {
-      href_text = `https://www.tsukuba.ac.jp/about/public-newspaper/${item.title}.pdf`
+      href_text = `https://www.tsukuba.ac.jp/about/public-newspaper/${item.issue}.pdf`
     }
     return (
       <tr key={index}>
-        <td><a href={href_text}>{item.title}</a></td>
-        <td>{item.page}</td>
         <td>{item.issue}</td>
         <td>{item.date}</td>
+        <td><a href={href_text} target="blank">{item.title}</a></td>
+        <td>{item.page}</td>
         <td>{item.author}</td>
       </tr>
     )
@@ -61,10 +61,10 @@ function showResult(data: ResultItem[]) {
       <caption>検索結果</caption>
       <thead>
         <tr>
-          <th>記事名</th>
-          <th>該当ページ</th>
           <th>号数</th>
           <th>日付</th>
+          <th>記事名</th>
+          <th>該当ページ</th>
           <th>執筆者</th>
         </tr>
       </thead>
@@ -91,17 +91,17 @@ export default function Search_fulltext() {
       sort: formData.get("sort") as string,
       mode: formData.get("mode") as string
     };
-    console.log(formJson);
+    // console.log(formJson);
 
     try {
       const res = await fetchData(formJson);
       setData(res);
-      console.log(data);
+      // console.log(data);
     }
     catch (err) {
       if (err instanceof Error) {
         setError(err.message);
-        console.log(error);
+        // console.log(error);
       };
     };
   };
