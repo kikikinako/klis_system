@@ -20,12 +20,17 @@ export default function Root () {
                 </li>
                 <li>
                   <NavLink to={"search_fulltext"} className={"link"}>
-                    全文検索
+                    単語検索
                   </NavLink>
                 </li>
                 <li>
                   <NavLink to={"search_title"} className={"link"}>
                     記事名検索
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to={"irregular_issue"} className={"link"}>
+                    検索対象外PDF一覧
                   </NavLink>
                 </li>
                 <li>
