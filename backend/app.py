@@ -67,29 +67,34 @@ def search_post():
 
         # 各単語ごとに該当行を取得し、号・ページを集約
         tmp_result = {}
+        matched_words = {}  # 追加: filenameごとにヒット単語を記録
         for kw in keywords:
             c.execute('''
-                SELECT filename, page
+                SELECT word, filename, page
                 FROM index_table
                 WHERE word LIKE ?
             ''', ('%' + kw + '%',))
             rows = c.fetchall()
             for row in rows:
-                filenames = ast.literal_eval(row[0])
-                page_lists = ast.literal_eval(row[1])
+                word = row[0]
+                filenames = ast.literal_eval(row[1])
+                page_lists = ast.literal_eval(row[2])
                 for n in range(len(filenames)):
                     filename = filenames[n]
                     page_list = page_lists[n]
                     if filename in tmp_result:
                         tmp_result[filename] += page_list
+                        matched_words[filename].add(word)
                     else:
                         tmp_result[filename] = page_list
+                        matched_words[filename] = set([word])
 
         for key in tmp_result:
             tmp_result[key] = sorted(set(tmp_result[key])) #重複の除去とソート
             result.append({
                 "filename": key,
-                "page": tmp_result[key]
+                "page": tmp_result[key],
+                "matched_keywords": sorted(list(matched_words[key]))
             })
 
         conn.close()
