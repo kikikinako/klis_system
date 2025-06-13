@@ -1,6 +1,6 @@
 export default function IrregularIssue() {
   const excludedPdfs = [
-     244, 246, 255
+     244, 245, 246, 
   ];
 
   return (
