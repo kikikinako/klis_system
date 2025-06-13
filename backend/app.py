@@ -60,25 +60,31 @@ def search_post():
         conn = sqlite3.connect("tsukuba_news_fulltext.db")
         c = conn.cursor()
 
-        c.execute('''
-            SELECT filename, page
-            FROM index_table
-            WHERE word LIKE ?
-        ''', ('%' + keyword + '%',))
-        rows = c.fetchall()
+        # クエリを単語ごとに分割
+        keywords = keyword.split()
+        if not keywords:
+            return jsonify([])
 
-        tmp_result = {} #{"filename": "[page,page...],..."}と格納するための一時的なファイル
+        # 各単語ごとに該当行を取得し、号・ページを集約
+        tmp_result = {}
+        for kw in keywords:
+            c.execute('''
+                SELECT filename, page
+                FROM index_table
+                WHERE word LIKE ?
+            ''', ('%' + kw + '%',))
+            rows = c.fetchall()
+            for row in rows:
+                filenames = ast.literal_eval(row[0])
+                page_lists = ast.literal_eval(row[1])
+                for n in range(len(filenames)):
+                    filename = filenames[n]
+                    page_list = page_lists[n]
+                    if filename in tmp_result:
+                        tmp_result[filename] += page_list
+                    else:
+                        tmp_result[filename] = page_list
 
-        for row in rows:
-            filenames = ast.literal_eval(row[0]) #文字列をリストに変換
-            page_lists = ast.literal_eval(row[1])
-            for n in range(len(filenames)): #号数と該当ページのインデックスは対応しているはずなので
-                filename = filenames[n]
-                page_list = page_lists[n]
-                if filename in tmp_result:
-                    tmp_result[filename] += page_list
-                else:
-                    tmp_result[filename] = page_list
         for key in tmp_result:
             tmp_result[key] = sorted(set(tmp_result[key])) #重複の除去とソート
             result.append({
