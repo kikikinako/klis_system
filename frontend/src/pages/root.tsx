@@ -29,11 +29,6 @@ export default function Root () {
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to={"irregular_issue"} className={"link"}>
-                    検索対象外PDF一覧
-                  </NavLink>
-                </li>
-                <li>
                   <NavLink to={"about"} className={"link"}>
                     About
                   </NavLink>  

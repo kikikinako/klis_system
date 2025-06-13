@@ -4,9 +4,11 @@ export default function IrregularIssue() {
   ];
 
   return (
-    <div>
-      <h2>検索対象外PDF一覧</h2>
-      <p>以下のPDFファイルは形式が異なるため、検索対象外としています。</p>
+    <div className="paragraph">
+      <div className="page_title">
+        <h1>検索対象外PDF一覧</h1>
+        <p className="sub_title">以下のPDFファイルは形式が異なるため、検索対象外としています。</p>
+      </div>
       <table>
         <thead>
           <tr>
