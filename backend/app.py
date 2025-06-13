@@ -88,15 +88,22 @@ def search_post():
                     else:
                         tmp_result[filename] = page_list
                         matched_words[filename] = set([word])
-
-        for key in tmp_result:
-            tmp_result[key] = sorted(set(tmp_result[key])) #重複の除去とソート
-            result.append({
-                "filename": key,
-                "page": tmp_result[key],
-                "matched_keywords": sorted(list(matched_words[key]))
-            })
-
+        if sort == "asc":
+            for key in sorted(tmp_result, reverse=True):
+                tmp_result[key] = sorted(set(tmp_result[key])) #重複の除去とソート
+                result.append({
+                    "filename": key,
+                    "page": tmp_result[key],
+                    "matched_keywords": sorted(list(matched_words[key]))
+                })
+        else:
+            for key in sorted(tmp_result):
+                tmp_result[key] = sorted(set(tmp_result[key])) #重複の除去とソート
+                result.append({
+                    "filename": key,
+                    "page": tmp_result[key],
+                    "matched_keywords": sorted(list(matched_words[key]))
+                }
         conn.close()
 
     else:
