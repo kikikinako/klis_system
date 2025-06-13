@@ -98,8 +98,8 @@ export default function Search_fulltext() {
   return (
     <>
       <div className="page_title">
-        <h1 className="title">全文検索</h1>
-        <p className="sub_title">新聞全体に対する全文検索を行います</p>
+        <h1 className="title">単語検索</h1>
+        <p className="sub_title">新聞全体に対する単語検索を行います</p>
       </div>
       <form method="post" onSubmit={handleSubmit}>
         <input type="hidden" name="mode" value="fulltext" />

@@ -12,14 +12,17 @@ export default function Home() {
       <div className="home-menu-wrapper">
         <div className="home-menu">
           <div id="home-menu1">
-            <h1><NavLink to={"search_fulltext"}>全文検索</NavLink></h1>
+            <h1><NavLink to={"search_fulltext"}>単語検索</NavLink></h1>
             <p>　新聞記事全体を対象とした検索を行います。</p>
           </div>
           <div id="home-menu2">
             <h1><NavLink to={"search_title"}>記事名検索</NavLink></h1>
             <p>　それぞれの新聞の記事名・見出しを対象として検索を行います。</p>
           </div>
-          <div id="home-menu3"></div>
+          <div id="home-menu3">
+            <h1><NavLink to={"irregular_issue"}>検索対象外PDF一覧</NavLink></h1>
+            <p>　形式が異なるため、検索対象外としたPDFファイルの一覧を表示します。</p>
+          </div>
           <div id="home-menu4">
             <h1><NavLink to={"about"}>ABOUT</NavLink></h1>
             <p>　システムの概要や使い方について記載しています。</p>

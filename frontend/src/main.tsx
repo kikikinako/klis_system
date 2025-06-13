@@ -13,6 +13,7 @@ import Home from "./pages/home";
 import About from "./pages/about";
 import Search_title from "./pages/search_title";
 import Search_fulltext from "./pages/search_fulltext";
+import IrregularIssue from "./pages/irregular_issue";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -31,6 +32,9 @@ const router = createBrowserRouter(
         <Route
         path="search_title"
         element={<Search_title />}/>
+        <Route
+        path="irregular_issue"
+        element={<IrregularIssue />} />
       </Route>
     </>
   )
