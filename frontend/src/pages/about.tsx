@@ -18,14 +18,25 @@ export default function About() {
         </div>
         <div className="description">
           <p>
-            全文検索では、筑波大学新聞内に含まれる文章を対象として検索を行います。
+            単語検索では、筑波大学新聞内に含まれる単語を対象として検索を行います。
           </p>
           <p>
             記事名検索では、筑波大学新聞の記事の見出し・小見出しの名前を対象として検索を行います。
           </p>
         </div>
       </div>
-
+      <div className="paragraph">
+        <div className="page_title">
+          <h1>検索対象外PDF一覧</h1>
+          <p className="sub_title">形式が異なるため、検索対象外としたPDFファイルの一覧を表示します。</p>
+        </div>
+        <div className="description">
+          <p>以下のPDFファイルは形式が異なるため、検索対象外としています。</p>
+          <ul>
+            <li><a href="/irregular_issue">検索対象外PDF一覧</a></li>
+          </ul>
+        </div>
+      </div>
       <div className="paragraph">
         <div className="page_title">
           <h1>システム概要</h1>

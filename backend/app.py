@@ -13,6 +13,7 @@ def search_post():
 
     keyword = data.get('keywords', '')
     mode = data.get('mode', 'fulltext')  # 'title' または 'fulltext'
+    sort = data.get('sort', 'des')
 
     if not keyword:
         return jsonify({"error": "No keyword provided"}), 400
@@ -60,32 +61,50 @@ def search_post():
         conn = sqlite3.connect("tsukuba_news_fulltext.db")
         c = conn.cursor()
 
-        c.execute('''
-            SELECT filename, page
-            FROM index_table
-            WHERE word LIKE ?
-        ''', ('%' + keyword + '%',))
-        rows = c.fetchall()
+        # クエリを単語ごとに分割
+        keywords = keyword.split()
+        if not keywords:
+            return jsonify([])
 
-        tmp_result = {} #{"filename": "[page,page...],..."}と格納するための一時的なファイル
-
-        for row in rows:
-            filenames = ast.literal_eval(row[0]) #文字列をリストに変換
-            page_lists = ast.literal_eval(row[1])
-            for n in range(len(filenames)): #号数と該当ページのインデックスは対応しているはずなので
-                filename = filenames[n]
-                page_list = page_lists[n]
-                if filename in tmp_result:
-                    tmp_result[filename] += page_list
-                else:
-                    tmp_result[filename] = page_list
-        for key in tmp_result:
-            tmp_result[key] = sorted(set(tmp_result[key])) #重複の除去とソート
-            result.append({
-                "filename": key,
-                "page": tmp_result[key]
-            })
-
+        # 各単語ごとに該当行を取得し、号・ページを集約
+        tmp_result = {}
+        matched_words = {}  # 追加: filenameごとにヒット単語を記録
+        for kw in keywords:
+            c.execute('''
+                SELECT word, filename, page
+                FROM index_table
+                WHERE word LIKE ?
+            ''', ('%' + kw + '%',))
+            rows = c.fetchall()
+            for row in rows:
+                word = row[0]
+                filenames = ast.literal_eval(row[1])
+                page_lists = ast.literal_eval(row[2])
+                for n in range(len(filenames)):
+                    filename = filenames[n]
+                    page_list = page_lists[n]
+                    if filename in tmp_result:
+                        tmp_result[filename] += page_list
+                        matched_words[filename].add(word)
+                    else:
+                        tmp_result[filename] = page_list
+                        matched_words[filename] = set([word])
+        if sort == "asc":
+            for key in sorted(tmp_result, reverse=True):
+                tmp_result[key] = sorted(set(tmp_result[key])) #重複の除去とソート
+                result.append({
+                    "filename": key,
+                    "page": tmp_result[key],
+                    "matched_keywords": sorted(list(matched_words[key]))
+                })
+        else:
+            for key in sorted(tmp_result):
+                tmp_result[key] = sorted(set(tmp_result[key])) #重複の除去とソート
+                result.append({
+                    "filename": key,
+                    "page": tmp_result[key],
+                    "matched_keywords": sorted(list(matched_words[key]))
+                })
         conn.close()
 
     else:
