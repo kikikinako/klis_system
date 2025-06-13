@@ -13,7 +13,7 @@ export default function Home() {
         <div className="home-menu">
           <div id="home-menu1">
             <h1><NavLink to={"search_fulltext"}>単語検索</NavLink></h1>
-            <p>　新聞記事全体を対象とした検索を行います。</p>
+            <p>　新聞記事全体を対象とした単語検索を行います。</p>
           </div>
           <div id="home-menu2">
             <h1><NavLink to={"search_title"}>記事名検索</NavLink></h1>
