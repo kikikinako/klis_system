@@ -13,6 +13,7 @@ def search_post():
 
     keyword = data.get('keywords', '')
     mode = data.get('mode', 'fulltext')  # 'title' または 'fulltext'
+    sort = data.get('sort', 'des')
 
     if not keyword:
         return jsonify({"error": "No keyword provided"}), 400
