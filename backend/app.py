@@ -103,7 +103,7 @@ def search_post():
                     "filename": key,
                     "page": tmp_result[key],
                     "matched_keywords": sorted(list(matched_words[key]))
-                }
+                })
         conn.close()
 
     else:
