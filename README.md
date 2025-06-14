@@ -25,7 +25,7 @@
 | 氏名           | 役割                             | 主な担当内容 |
 |----------------|----------------------------------|----------------|
 | 浅野 怜矢       | プロジェクト推進・外部連携          | アイデア出し、スライド作成、筑波大学新聞など外部との連絡 |
-| 茂木 颯太       | フロントエンド開発                  | React（TypeScript）およびCSSによるUI設計と実装 |
+| kinako       | フロントエンド開発                  | React（TypeScript）およびCSSによるUI設計と実装 |
 | 鈴木 史麿       | バックエンド・フロントエンド・データ処理 | PDFデータの解析、データベース、フロントエンド・バックエンド両方の機能改善 |
 | CHEN XINZHE    | バックエンド開発                    | SQLite3を用いたデータベース設計とPythonによる検索機能の実装 |
 
@@ -60,4 +60,4 @@ The system aims to promote the use of on-campus newspaper archives and facilitat
 | Reiya Asano      | Project Lead & Liaison          | Proposed core ideas, created slides, and handled external communication (e.g., Tsukuba University Newspaper) |
 | Xinzhe Chen      | Backend Developer               | Designed and implemented the search functionality using Python and SQLite3 |
 | Fumimaro Suzuki  | Backend / Frontend Engineer     | Parsed raw PDF data, contributed to database schema design, and improved both backend and frontend features |
-| Sota Motegi      | Frontend Developer              | Built the user interface using React (TypeScript) and styled it with CSS |
+| Kinako      | Frontend Developer              | Built the user interface using React (TypeScript) and styled it with CSS |
